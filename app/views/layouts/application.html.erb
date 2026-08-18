@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Shift Swap" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Shift Swap">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body data-controller="page-loader">
+    <div class="page-loader" data-page-loader-target="bar" aria-hidden="true"></div>
+
+    <header class="nav-bar">
+      <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
+        <%= link_to root_path, class: "brand-mark" do %>
+          Shift <span class="text-lagoon">Swap</span>
+        <% end %>
+
+        <nav class="flex flex-wrap items-center gap-2 text-sm font-medium text-ink-soft">
+          <% if logged_in? %>
+            <%= link_to "Dashboard", dashboard_path, class: "hover:text-lagoon" %>
+            <%= link_to "Request swap", new_swap_request_path, class: "hover:text-lagoon" %>
+            <% if current_user.manager? %>
+              <%= link_to "Manager", manager_swap_requests_path, class: "hover:text-lagoon" %>
+            <% end %>
+            <%= button_to "Sign out", logout_path, method: :delete, class: "btn-secondary !py-1.5 !px-3" %>
+          <% else %>
+            <%= link_to "Sign in", login_path, class: "hover:text-lagoon" %>
+            <%= link_to "Sign up", signup_path, class: "btn-primary !py-1.5 !px-3" %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <% if notice.present? %>
+        <div class="flash-notice fade-up" role="status"><%= notice %></div>
+      <% end %>
+      <% if alert.present? %>
+        <div class="flash-alert fade-up" role="alert"><%= alert %></div>
+      <% end %>
+
+      <%= yield %>
+    </main>
+  </body>
+</html>

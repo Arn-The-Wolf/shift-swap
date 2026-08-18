@@ -1,0 +1,32 @@
+<% content_for :title, "Shift Swap" %>
+
+<section class="hero-stage fade-up">
+  <div class="relative z-10 max-w-xl">
+    <p class="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-tide">For small teams</p>
+    <h1 class="font-display text-4xl font-bold leading-tight text-white sm:text-5xl">
+      Shift <span class="text-tide">Swap</span>
+    </h1>
+    <p class="mt-4 text-lg text-foam/80">
+      See your upcoming shifts, ask a teammate to cover, and let managers approve without the group-chat chaos.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <%= link_to "Get started", signup_path, class: "btn-primary" %>
+      <%= link_to "Sign in", login_path, class: "btn-secondary !bg-white/10 !text-white !border-white/20 hover:!bg-white/20" %>
+    </div>
+  </div>
+</section>
+
+<section class="mt-10 grid gap-4 fade-up-delay sm:grid-cols-3">
+  <div class="panel">
+    <h2 class="font-display text-xl font-semibold text-ink">Your schedule</h2>
+    <p class="mt-2 text-sm text-ink-soft">A clean dashboard of what’s coming up on your team calendar.</p>
+  </div>
+  <div class="panel">
+    <h2 class="font-display text-xl font-semibold text-ink">Quick swaps</h2>
+    <p class="mt-2 text-sm text-ink-soft">Request a cover from any teammate in a couple of clicks.</p>
+  </div>
+  <div class="panel">
+    <h2 class="font-display text-xl font-semibold text-ink">Manager review</h2>
+    <p class="mt-2 text-sm text-ink-soft">Approve or deny pending swaps instantly with Hotwire — no full page reload.</p>
+  </div>
+</section>

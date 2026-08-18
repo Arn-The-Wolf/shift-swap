@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: shift-swap
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: shift-swap-db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: RAILS_ENV
+        value: production
+      - key: WEB_CONCURRENCY
+        value: "2"
+    healthCheckPath: /up
+
+databases:
+  - name: shift-swap-db
+    plan: free
+    databaseName: shift_swap
+    user: shift_swap

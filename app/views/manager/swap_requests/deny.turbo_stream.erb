@@ -1,0 +1,11 @@
+<%= turbo_stream.replace @swap_request do %>
+  <%= render partial: "manager/swap_requests/swap_request", locals: { swap_request: @swap_request } %>
+<% end %>
+
+<% if SwapRequest.pending.joins(:requesting_user).where(users: { team_id: current_user.team_id }).none? %>
+  <%= turbo_stream.append "pending_swap_requests" do %>
+    <div id="empty_pending" class="panel text-sm text-ink-soft">
+      No pending requests for <%= current_user.team.name %>. You’re caught up.
+    </div>
+  <% end %>
+<% end %>

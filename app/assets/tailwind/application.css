@@ -1,0 +1,209 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Outfit:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #12212b;
+  --color-ink-soft: #3a5160;
+  --color-foam: #f3faf8;
+  --color-mist: #d7ebe4;
+  --color-lagoon: #0f766e;
+  --color-lagoon-deep: #0b5f59;
+  --color-tide: #14b8a6;
+  --color-sand: #f6e7c8;
+  --color-coral: #e07a5f;
+  --color-success: #2f9e74;
+  --color-danger: #c45c4a;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 min-h-screen font-sans text-ink antialiased;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(20, 184, 166, 0.22), transparent 55%),
+      radial-gradient(900px 500px at 95% 0%, rgba(246, 231, 200, 0.55), transparent 50%),
+      linear-gradient(165deg, #eef8f5 0%, #f7faf9 42%, #e8f3ef 100%);
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .brand-mark {
+    @apply font-display text-2xl font-bold tracking-tight text-ink;
+  }
+
+  .page-shell {
+    @apply mx-auto w-full max-w-5xl px-5 pb-16 pt-8 sm:px-8;
+  }
+
+  .nav-bar {
+    @apply sticky top-0 z-40 border-b border-mist/70 bg-foam/80 backdrop-blur-md;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-lagoon px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:bg-lagoon-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lagoon;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-mist bg-white/80 px-4 py-2.5 text-sm font-semibold text-ink transition duration-200 hover:border-tide hover:text-lagoon-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lagoon;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-danger px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-[#a84b3c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lagoon;
+  }
+
+  .btn-success {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-success px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-[#268562] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lagoon;
+  }
+
+  .field {
+    @apply mt-1 w-full rounded-xl border border-mist bg-white/90 px-3.5 py-2.5 text-ink shadow-sm outline-none transition focus:border-tide focus:ring-2 focus:ring-tide/30;
+  }
+
+  .label {
+    @apply text-sm font-medium text-ink-soft;
+  }
+
+  .panel {
+    @apply rounded-2xl border border-white/70 bg-white/70 p-5 shadow-[0_18px_50px_-28px_rgba(18,33,43,0.45)] backdrop-blur;
+  }
+
+  .flash-notice {
+    @apply mb-6 rounded-xl border border-tide/30 bg-tide/10 px-4 py-3 text-sm font-medium text-lagoon-deep;
+  }
+
+  .flash-alert {
+    @apply mb-6 rounded-xl border border-coral/40 bg-coral/10 px-4 py-3 text-sm font-medium text-danger;
+  }
+
+  .shift-row {
+    @apply flex flex-col gap-2 border-b border-mist/80 py-4 last:border-b-0 sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .status-pending {
+    @apply inline-flex items-center rounded-md bg-sand px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-ink;
+  }
+
+  .status-approved {
+    @apply inline-flex items-center rounded-md bg-tide/15 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-lagoon-deep;
+  }
+
+  .status-denied {
+    @apply inline-flex items-center rounded-md bg-coral/15 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-danger;
+  }
+
+  .hero-stage {
+    @apply relative overflow-hidden rounded-[2rem] border border-white/60 bg-ink px-8 py-14 text-foam shadow-[0_30px_80px_-40px_rgba(18,33,43,0.8)] sm:px-12 sm:py-16;
+  }
+
+  .hero-stage::before {
+    content: "";
+    position: absolute;
+    inset: -20% auto auto -10%;
+    width: 55%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.45), transparent 70%);
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+
+  .hero-stage::after {
+    content: "";
+    position: absolute;
+    inset: auto -15% -30% auto;
+    width: 50%;
+    height: 70%;
+    background: radial-gradient(circle, rgba(246, 231, 200, 0.28), transparent 70%);
+    animation: drift 14s ease-in-out infinite alternate-reverse;
+  }
+
+  .loader-dots {
+    @apply inline-flex items-center gap-1;
+  }
+
+  .loader-dots span {
+    @apply h-1.5 w-1.5 rounded-full bg-current opacity-40;
+    animation: bounce-dot 0.9s ease-in-out infinite;
+  }
+
+  .loader-dots span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .loader-dots span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  .fade-up {
+    animation: fade-up 0.55s ease both;
+  }
+
+  .fade-up-delay {
+    animation: fade-up 0.7s ease 0.12s both;
+  }
+
+  .page-loader {
+    @apply pointer-events-none fixed inset-x-0 top-0 z-50 h-1 origin-left scale-x-0 bg-gradient-to-r from-tide via-lagoon to-sand opacity-0;
+  }
+
+  .page-loader.is-active {
+    animation: progress-bar 0.85s ease-in-out infinite;
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(8%, 6%, 0) scale(1.08);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-dot {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@keyframes progress-bar {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    transform: scaleX(0.65);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}

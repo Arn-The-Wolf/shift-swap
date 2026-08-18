@@ -1,0 +1,26 @@
+<% content_for :title, "Sign in · Shift Swap" %>
+
+<section class="mx-auto max-w-md fade-up">
+  <div class="panel">
+    <h1 class="font-display text-3xl font-bold text-ink">Sign in</h1>
+    <p class="mt-2 text-sm text-ink-soft">Welcome back to your team schedule.</p>
+
+    <%= form_with url: login_path, class: "mt-6 space-y-4" do |f| %>
+      <div>
+        <%= label_tag :email, "Email", class: "label" %>
+        <%= email_field_tag :email, params[:email], required: true, autofocus: true, class: "field", placeholder: "you@team.com" %>
+      </div>
+      <div>
+        <%= label_tag :password, "Password", class: "label" %>
+        <%= password_field_tag :password, nil, required: true, class: "field", placeholder: "••••••••" %>
+      </div>
+      <%= f.submit "Sign in",
+            class: "btn-primary w-full",
+            data: { turbo_submits_with: "Signing in…" } %>
+    <% end %>
+
+    <p class="mt-5 text-center text-sm text-ink-soft">
+      New here? <%= link_to "Create an account", signup_path, class: "font-semibold text-lagoon hover:text-lagoon-deep" %>
+    </p>
+  </div>
+</section>

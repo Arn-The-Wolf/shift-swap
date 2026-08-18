@@ -1,0 +1,43 @@
+<% content_for :title, "Request swap · Shift Swap" %>
+
+<section class="mx-auto max-w-lg fade-up">
+  <div class="panel">
+    <h1 class="font-display text-3xl font-bold text-ink">Request a swap</h1>
+    <p class="mt-2 text-sm text-ink-soft">Pick one of your upcoming shifts and a teammate who can cover.</p>
+
+    <% if @swap_request.errors.any? %>
+      <div class="flash-alert mt-4">
+        <ul class="list-disc pl-5">
+          <% @swap_request.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @shifts.empty? || @teammates.empty? %>
+      <p class="mt-6 text-sm text-ink-soft">
+        <% if @shifts.empty? %>
+          You need an upcoming shift before you can request a swap.
+        <% else %>
+          You need at least one teammate on your team.
+        <% end %>
+      </p>
+      <%= link_to "Back to dashboard", dashboard_path, class: "btn-secondary mt-4" %>
+    <% else %>
+      <%= form_with model: @swap_request, class: "mt-6 space-y-4" do |f| %>
+        <div>
+          <%= f.label :shift_id, "Your shift", class: "label" %>
+          <%= f.collection_select :shift_id, @shifts, :id, :option_label, { prompt: "Select a shift" }, class: "field", required: true %>
+        </div>
+        <div>
+          <%= f.label :target_user_id, "Ask teammate", class: "label" %>
+          <%= f.collection_select :target_user_id, @teammates, :id, :name, { prompt: "Select a teammate" }, class: "field", required: true %>
+        </div>
+        <%= f.submit "Send request",
+              class: "btn-primary w-full",
+              data: { turbo_submits_with: "Sending…" } %>
+      <% end %>
+    <% end %>
+  </div>
+</section>

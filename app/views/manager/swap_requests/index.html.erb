@@ -1,0 +1,19 @@
+<% content_for :title, "Manager · Shift Swap" %>
+
+<section class="fade-up">
+  <div class="mb-8">
+    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-lagoon">Manager desk</p>
+    <h1 class="font-display text-3xl font-bold text-ink sm:text-4xl">Pending swap requests</h1>
+    <p class="mt-1 text-ink-soft">Approve or deny without leaving the page.</p>
+  </div>
+
+  <div id="pending_swap_requests" class="space-y-4">
+    <% if @pending_requests.any? %>
+      <%= render partial: "manager/swap_requests/swap_request", collection: @pending_requests %>
+    <% else %>
+      <div id="empty_pending" class="panel text-sm text-ink-soft">
+        No pending requests for <%= current_user.team.name %>. You’re caught up.
+      </div>
+    <% end %>
+  </div>
+</section>
